@@ -1,4 +1,4 @@
 freezing-dangerzone
 ===================
 
-java based solution tasks from pythonchallenge.com
+java based solutions tasks from pythonchallenge.com. 
