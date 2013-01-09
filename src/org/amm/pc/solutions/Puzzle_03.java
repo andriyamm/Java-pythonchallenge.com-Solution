@@ -13,8 +13,22 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.amm.pc.utils.JCHelper;
+
+/**
+ * find rare characters in the file 
+ *
+ * puzzle's url - http://www.pythonchallenge.com/pc/def/ocr.html
+ */
 public class Puzzle_03 {
 
+	/**
+	 * Read file Character by character and check if character is letter.
+	 * 
+	 * @param reader
+	 * @return
+	 * @throws IOException
+	 */
 	public static String solution_01(Reader reader) throws IOException {
 		int readChar;
 		StringBuffer sb = new StringBuffer();
@@ -25,6 +39,13 @@ public class Puzzle_03 {
 		return sb.toString();
 	}
 
+	/**
+	 * Read file line by line and check line with regular expression
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public static String solution_02(String filename)
 			throws FileNotFoundException {
 		StringBuffer sb = new StringBuffer();
@@ -41,10 +62,44 @@ public class Puzzle_03 {
 		return sb.toString();
 	}
 
-	public static String solution_03(Reader reader) throws IOException {
+	/**
+	 * check all file's content with regular expression
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public static String solution_3(String filename)
+			throws FileNotFoundException {
+		
+		StringBuffer sb = new StringBuffer();
+		Pattern pattern = Pattern.compile(PATTERN);
+		Matcher matcher = pattern.matcher(JCHelper.getFileContent(filename));
+		while (matcher.find()) {
+			sb.append(matcher.group());
+		}
+		return sb.toString();
+	}
+	
+	/**
+	 * Create Map where key is character, value character count 
+	 * then Create String with Rare characters
+	 * 
+	 * @param reader
+	 * @return
+	 * @throws IOException
+	 */
+	public static String solution_4(Reader reader) throws IOException {
 		return createRareCharactersString(countCharacters(reader));
 	}
 	
+	/**
+	 * Create Map where key is character, value character count 
+	 * 
+	 * @param reader
+	 * @return
+	 * @throws IOException
+	 */
 	public static Map<Character, Integer> countCharacters(Reader reader) throws IOException{
 		Map<Character, Integer> characterCountMap = new LinkedHashMap<Character, Integer>();
 		int readChar;
@@ -61,6 +116,12 @@ public class Puzzle_03 {
 		return characterCountMap;
 	}
 	
+	/**
+	 * Create String with Rare characters
+	 * 
+	 * @param characterCountMap
+	 * @return
+	 */
 	public static String createRareCharactersString(Map<Character, Integer> characterCountMap){
 		StringBuffer sb = new StringBuffer();
 		for(Entry<Character, Integer> entry: characterCountMap.entrySet()){
