@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
@@ -60,4 +61,28 @@ public class JCHelper {
 		
 		return sb;
 	}
+	
+	public static void main(String urlString) {
+	
+	    BufferedReader buffer = null;
+	    try {
+	      URL url = new URL(urlString);
+	      buffer = new BufferedReader(new InputStreamReader(url.openStream()));
+
+	      String inputLine;
+	      while ((inputLine = buffer.readLine()) != null) {
+	        System.out.println(inputLine);
+	      }
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	      if (buffer != null) {
+	        try {
+	          buffer.close();
+	        } catch (IOException e) {
+	          e.printStackTrace();
+	        }
+	      }
+	    }
+	  }
 }

@@ -9,4 +9,8 @@ public interface JCConstants {
 	interface Puzzle_04{
 		public static final String PATTERN = "[^A-Z]+[A-Z]{3}([a-z])[A-Z]{3}[^A-Z]+";
 	}
+	
+	interface Puzzle_05{
+		public static final String PATTERN = "and the next nothing is (\\d+)";
+	}
 }
