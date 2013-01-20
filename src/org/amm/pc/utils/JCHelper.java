@@ -16,11 +16,11 @@ public class JCHelper {
 
 	public static void handleFile(File file, Charset encoding)
 			throws IOException {
-		
+
 		InputStream inputStream = null;
 		Reader reader = null;
 		Reader buffer = null;
-		
+
 		try {
 			inputStream = new FileInputStream(file);
 			reader = new InputStreamReader(inputStream, encoding);
@@ -28,7 +28,7 @@ public class JCHelper {
 			handleCharacters(buffer);
 		} catch (Exception e) {
 
-		}finally{
+		} finally {
 			inputStream.close();
 			reader.close();
 			buffer.close();
@@ -50,39 +50,40 @@ public class JCHelper {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public static StringBuffer getFileContent(String filename) throws FileNotFoundException{
-		
+	public static StringBuffer getFileContent(String filename)
+			throws FileNotFoundException {
+
 		StringBuffer sb = new StringBuffer();
 		Scanner input = new Scanner(new File(filename));
 		while (input.hasNextLine()) {
 			sb.append(input.nextLine());
 		}
 		input.close();
-		
+
 		return sb;
 	}
-	
-	public static void main(String urlString) {
-	
-	    BufferedReader buffer = null;
-	    try {
-	      URL url = new URL(urlString);
-	      buffer = new BufferedReader(new InputStreamReader(url.openStream()));
 
-	      String inputLine;
-	      while ((inputLine = buffer.readLine()) != null) {
-	        System.out.println(inputLine);
-	      }
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    } finally {
-	      if (buffer != null) {
-	        try {
-	          buffer.close();
-	        } catch (IOException e) {
-	          e.printStackTrace();
-	        }
-	      }
-	    }
-	  }
+	public static void main(String urlString) {
+
+		BufferedReader buffer = null;
+		try {
+			URL url = new URL(urlString);
+			buffer = new BufferedReader(new InputStreamReader(url.openStream()));
+
+			String inputLine;
+			while ((inputLine = buffer.readLine()) != null) {
+				System.out.println(inputLine);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (buffer != null) {
+				try {
+					buffer.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
