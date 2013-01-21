@@ -52,17 +52,11 @@ public class Puzzle_06 {
 
 	public void solution_0() {
 		try {
-			StringBuffer sb = JCHelper.getFileContent(FILENAME);
+			String sb = JCHelper.getFileContent(FILENAME).toString();
 
-			List<>
-			Pattern pattern = Pattern.compile(PATTERN_PAIR_ARRAY,
-					Pattern.DOTALL | Pattern.MULTILINE);
-			Matcher matcher = pattern.matcher(sb);
-			while (matcher.find()) {
-				// array
-				getListOfPair(matcher.group(1));
-			}
-
+			List<ArrayList<Pair>> banner = createBanner(sb);
+			printBanner(banner);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,23 +64,40 @@ public class Puzzle_06 {
 
 	}
 
-	private List<Pair> getListOfPair(String str){
-		
+	private void printBanner(List<ArrayList<Pair>> banner){
+		//TODO
+	}
+	
+	private List<ArrayList<Pair>> createBanner(String textBanner) {
+
+		List<ArrayList<Pair>> banner = new ArrayList<ArrayList<Pair>>();
+
+		Pattern pattern = Pattern.compile(PATTERN_PAIR_ARRAY, Pattern.DOTALL
+				| Pattern.MULTILINE);
+		Matcher matcher = pattern.matcher(textBanner);
+		while (matcher.find()) {
+			banner.add(getListOfPair(matcher.group(1)));
+		}
+
+		return banner;
+	}
+
+	private ArrayList<Pair> getListOfPair(String str) {
+
 		Pattern pattern = Pattern.compile(PATTERN_PAIR, Pattern.DOTALL
 				| Pattern.MULTILINE);
 		Matcher matcher = pattern.matcher(str);
 		List<Pair> list = new ArrayList<Pair>();
-		
+
 		while (matcher.find()) {
 			String s = matcher.group();
-			list.add(new Pair(getSymbol(s, PATTERN_CHARACTER), parseQuantity(getSymbol(s,PATTERN_QUANTITY))));
+			list.add(new Pair(getSymbol(s, PATTERN_CHARACTER),
+					parseQuantity(getSymbol(s, PATTERN_QUANTITY))));
 		}
-		
+
 		return null;
-		
-		
 	}
-	
+
 	private String getSymbol(String sb, String patternString) {
 		Pattern pattern = Pattern.compile(patternString, Pattern.DOTALL
 				| Pattern.MULTILINE);
