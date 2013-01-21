@@ -15,22 +15,23 @@ public class Puzzle_05 {
 
 		BufferedReader buffer = null;
 		String urlStringWithNothing = null;
+		String inputLine = null;
 		String nothing = null;
-		String nothing_old = "63579";
+		String nothing_prev = "63579";
+		
 		try {
 			while (true) {
-				urlStringWithNothing = urlString + nothing_old;
+				urlStringWithNothing = urlString + nothing_prev;
 				URL url = new URL(urlStringWithNothing);
 				buffer = new BufferedReader(new InputStreamReader(
 						url.openStream()));
 
-				String inputLine = null;
 				while ((inputLine = buffer.readLine()) != null) {
 					nothing = nextNothing(inputLine);
 					if (nothing == null) {
-						return nothing_old;
+						return nothing_prev;
 					}
-					nothing_old = nothing;
+					nothing_prev = nothing;
 				}
 			}
 		} catch (Exception e) {
@@ -44,7 +45,6 @@ public class Puzzle_05 {
 				}
 			}
 		}
-
 		return null;
 	}
 
