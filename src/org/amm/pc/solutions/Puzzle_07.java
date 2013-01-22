@@ -2,14 +2,19 @@ package org.amm.pc.solutions;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.amm.pc.utils.JCHelper;
 import org.apache.commons.io.FileUtils;
 
 public class Puzzle_07 {
@@ -18,7 +23,10 @@ public class Puzzle_07 {
 	private static final String INPUT_ZIP_FILE = "D:\\workspace-git\\freezing-dangerzone\\puzzle_07.zip";
 	private static final String OUTPUT_FOLDER = "D:\\workspace-git\\freezing-dangerzone\\puzzle_07";
 	private static final String URL_STRING = "http://www.pythonchallenge.com/pc/def/channel.zip";
-
+	public static final String PATTERN = "and the next nothing is (\\d+)";
+	public static final String FIRST_NOTHING = "90052";
+	
+	private Map<String, String> nameToCommentMap = new HashMap<String, String>();
 	/**
 	 * @param args
 	 */
@@ -27,13 +35,35 @@ public class Puzzle_07 {
 		// unZip.unZipIt(INPUT_ZIP_FILE, OUTPUT_FOLDER);
 	}
 
-	public static void solution_0() throws IOException {
+	public void solution_0() throws IOException {
+		
 		URL url = new URL(URL_STRING);
 		File file = new File(INPUT_ZIP_FILE);
+		
 		FileUtils.copyURLToFile(url, file);
 		unZipIt(INPUT_ZIP_FILE, OUTPUT_FOLDER);
+
+		
 	}
 
+	public void create() throws FileNotFoundException{
+		
+		StringBuilder sb = new StringBuilder();
+		String fileName = null;
+		
+		fileName = nextNothing(FIRST_NOTHING);
+		sb.append(nameToCommentMap.get(fileName));
+		
+		while(fileName != null){
+			fileName = nextNothing(FIRST_NOTHING);
+			sb.append(nameToCommentMap.get(fileName));
+		}
+	}
+	
+	public void printResult(){
+		//TODO
+	}
+	
 	/**
 	 * find readme.txt
 	 * and get first nothing
@@ -48,11 +78,26 @@ public class Puzzle_07 {
 	 * find file with name of nothing
 	 * open it
 	 * get next nothing
+	 * @throws FileNotFoundException 
 	 */
-	public void nextNothing() {
-		// TODO
+	public String nextNothing(String fileName) throws FileNotFoundException {
+//		File file = new File(OUTPUT_FOLDER + File.separator
+//				+ fileName);
+		
+		String fileContent = JCHelper.getFileContent(OUTPUT_FOLDER + File.separator
+				+ fileName).toString();
+		
+		Pattern pattern = Pattern.compile(PATTERN);
+		if (fileContent != null) {
+			Matcher matcher = pattern.matcher(fileContent);
+			if (matcher.find()) {
+				return matcher.group(1);
+			}
+		}
+		return null;
 	}
 
+	
 	/**
 	 * Unzip it
 	 * 
@@ -61,32 +106,32 @@ public class Puzzle_07 {
 	 * @param output
 	 *            zip file output folder
 	 */
-	public static void unZipIt(String zipFile, String outputFolder) {
+	public  void unZipIt(String zipFile, String outputFolder) {
 
 		byte[] buffer = new byte[1024];
 
 		try {
-
 			// create output directory is not exists
 			File folder = new File(OUTPUT_FOLDER);
 			if (!folder.exists()) {
 				folder.mkdir();
 			}
-
+			
 			// get the zip file content
 			ZipInputStream zis = new ZipInputStream(
 					new FileInputStream(zipFile));
 			// get the zipped file list entry
-			ZipEntry ze = zis.getNextEntry();
+			ZipEntry zipEntry = zis.getNextEntry();
+			
+			while (zipEntry != null) {
 
-			while (ze != null) {
-
-				String fileName = ze.getName();
+				String fileName = zipEntry.getName();
 				File newFile = new File(outputFolder + File.separator
 						+ fileName);
 
-				System.out.println("file unzip : " + newFile.getAbsoluteFile());
-
+				//
+				nameToCommentMap.put(fileName, zipEntry.getComment());
+				
 				// create all non exists folders
 				// else you will hit FileNotFoundException for compressed folder
 				new File(newFile.getParent()).mkdirs();
@@ -99,13 +144,11 @@ public class Puzzle_07 {
 				}
 
 				fos.close();
-				ze = zis.getNextEntry();
+				zipEntry = zis.getNextEntry();
 			}
 
 			zis.closeEntry();
 			zis.close();
-
-			System.out.println("Done");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
