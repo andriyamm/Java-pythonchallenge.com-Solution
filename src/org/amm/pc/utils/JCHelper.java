@@ -11,9 +11,20 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JCHelper {
 
+	/**
+	 * Methods read file character by character
+	 * 
+	 * @param file
+	 *            file what will be read
+	 * @param encoding
+	 *            file encoding
+	 * @throws IOException
+	 */
 	public static void handleFile(File file, Charset encoding)
 			throws IOException {
 
@@ -25,9 +36,15 @@ public class JCHelper {
 			inputStream = new FileInputStream(file);
 			reader = new InputStreamReader(inputStream, encoding);
 			buffer = new BufferedReader(reader);
-			handleCharacters(buffer);
-		} catch (Exception e) {
 
+			int r;
+			while ((r = buffer.read()) != -1) {
+				char ch = (char) r;
+				System.out.println("Do something with " + ch);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			inputStream.close();
 			reader.close();
@@ -35,25 +52,19 @@ public class JCHelper {
 		}
 	}
 
-	private static void handleCharacters(Reader reader) throws IOException {
-		int r;
-		while ((r = reader.read()) != -1) {
-			char ch = (char) r;
-			System.out.println("Do something with " + ch);
-		}
-	}
-
 	/**
-	 * Get file content to StringBuffer
+	 * Get file content to StringBuilder
 	 * 
 	 * @param filename
-	 * @return
+	 * 			file what will be read
+	 * @return 
+	 * 		stringbuilder object with file contents
 	 * @throws FileNotFoundException
 	 */
-	public static StringBuffer getFileContent(String filename)
+	public static StringBuilder getFileContent(String filename)
 			throws FileNotFoundException {
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		Scanner input = new Scanner(new File(filename));
 		while (input.hasNextLine()) {
 			sb.append(input.nextLine());
@@ -63,7 +74,37 @@ public class JCHelper {
 		return sb;
 	}
 
-	public static void main(String urlString) {
+	/**
+	 * 
+	 * 
+	 * @param content
+	 * 
+	 * @param regexprPattern
+	 *            regular expression pattern string
+	 * @param groupNumber
+	 *            int number of group
+	 * @return
+	 */
+	public static String find(String content, String regexprPattern,
+			int groupNumber) {
+
+		Pattern pattern = Pattern.compile(regexprPattern);
+		if (content != null) {
+			Matcher matcher = pattern.matcher(content);
+			if (matcher.find()) {
+				return matcher.group(groupNumber);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * method print a content of web page
+	 * 
+	 * @param urlString
+	 *            web page address
+	 */
+	public static void printWebPageContent(String urlString) {
 
 		BufferedReader buffer = null;
 		try {
