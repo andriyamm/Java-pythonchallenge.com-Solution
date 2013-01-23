@@ -35,12 +35,12 @@ public class Puzzle_08 {
 		File file = new File("oxygen.png");
 		BufferedImage bi = ImageIO.read(file);
 
-		int width = bi.getHeight();
-		int height = bi.getWidth();
+		int height = bi.getHeight()/2;
+		int width = bi.getWidth();
 
 		StringBuilder sb = new StringBuilder();
 
-		for (int xx = 0; xx < width; xx++) {
+		for (int xx = 0; xx < width; xx=xx+7) {
 
 			Color originalColor = new Color(bi.getRGB(xx, height));
 			int r1 = originalColor.getRed();
