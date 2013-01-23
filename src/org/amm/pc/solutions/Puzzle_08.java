@@ -31,6 +31,7 @@ public class Puzzle_08 {
 	// TODO: check if red = green = blue
 
 	public static void solution_0() throws IOException {
+		
 		File file = new File("oxygen.png");
 		BufferedImage bi = ImageIO.read(file);
 
