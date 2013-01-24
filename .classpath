@@ -11,5 +11,12 @@
 	<classpathentry kind="lib" path="D:/workspace-git/lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="D:/workspace-git/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="D:/workspace-git/lib/commons-compress-1.4.1.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/fluent-hc-4.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/httpclient-cache-4.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="D:/workspace-git/lib/httpclient_lib/httpmime-4.2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
