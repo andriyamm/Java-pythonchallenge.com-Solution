@@ -7,6 +7,7 @@ import org.junit.Test;
 public class Puzzle_08_Test {
 
 	private static final String FILENAME = "oxygen.png";
+	
 	@Test
 	public void solution_01_Test() {
 		Puzzle_08 p08 = new Puzzle_08();

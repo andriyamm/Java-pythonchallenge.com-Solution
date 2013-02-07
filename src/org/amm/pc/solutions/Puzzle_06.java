@@ -10,9 +10,9 @@ import org.amm.pc.utils.JCHelper;
 
 public class Puzzle_06 {
 
-	public static final String PATTERN_PAIR_ARRAY = "(lp(.+)aa";
-	public static final String PATTERN_PAIR = "(g(.+)a";
-	public static final String PATTERN_QUANTITY = "(I(\\d+)";
+	public static final String PATTERN_PAIR_ARRAY = "[(lp](.+)[aa]";
+	public static final String PATTERN_PAIR = "[(g](.+)[a]";
+	public static final String PATTERN_QUANTITY = "[(]I(\\d+)";
 	public static final String PATTERN_CHARACTER = "g(\\d)";
 	public static final String FILENAME = "peak.txt";
 
@@ -97,6 +97,9 @@ public class Puzzle_06 {
 	}
 
 	private int parseQuantity(String quantity) {
-		return Integer.parseInt(quantity);
+		if(quantity != null){
+			return Integer.parseInt(quantity);
+		}
+		return -1;
 	}
 }

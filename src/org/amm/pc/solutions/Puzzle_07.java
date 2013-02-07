@@ -20,20 +20,13 @@ import org.apache.commons.io.FileUtils;
 public class Puzzle_07 {
 
 	List<String> fileList;
-	private static final String INPUT_ZIP_FILE = "D:\\workspace-git\\freezing-dangerzone\\puzzle_07.zip";
-	private static final String OUTPUT_FOLDER = "D:\\workspace-git\\freezing-dangerzone\\puzzle_07";
+	private static final String INPUT_ZIP_FILE = "puzzle_07.zip";
+	private static final String OUTPUT_FOLDER = "puzzle_07";
 	private static final String URL_STRING = "http://www.pythonchallenge.com/pc/def/channel.zip";
 	public static final String PATTERN = "and the next nothing is (\\d+)";
 	public static final String FIRST_NOTHING = "90052";
 	
 	private Map<String, String> nameToCommentMap = new HashMap<String, String>();
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// UnZip unZip = new UnZip();
-		// unZip.unZipIt(INPUT_ZIP_FILE, OUTPUT_FOLDER);
-	}
 
 	public void solution_0() throws IOException {
 		
