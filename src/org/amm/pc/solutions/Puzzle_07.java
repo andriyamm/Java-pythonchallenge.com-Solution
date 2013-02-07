@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.amm.pc.utils.JCHelper;
+import org.amm.pc.utils.JCFileHelper;
 import org.apache.commons.io.FileUtils;
 
 public class Puzzle_07 {
@@ -77,7 +77,7 @@ public class Puzzle_07 {
 //		File file = new File(OUTPUT_FOLDER + File.separator
 //				+ fileName);
 		
-		String fileContent = JCHelper.getFileContent(OUTPUT_FOLDER + File.separator
+		String fileContent = JCFileHelper.getFileContent(OUTPUT_FOLDER + File.separator
 				+ fileName).toString();
 		
 		Pattern pattern = Pattern.compile(PATTERN);

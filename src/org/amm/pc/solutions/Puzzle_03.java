@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.amm.pc.utils.JCHelper;
+import org.amm.pc.utils.JCFileHelper;
 
 /**
  * find rare characters in the file 
@@ -74,7 +74,7 @@ public class Puzzle_03 {
 		
 		StringBuffer sb = new StringBuffer();
 		Pattern pattern = Pattern.compile(PATTERN);
-		Matcher matcher = pattern.matcher(JCHelper.getFileContent(filename));
+		Matcher matcher = pattern.matcher(JCFileHelper.getFileContent(filename));
 		while (matcher.find()) {
 			sb.append(matcher.group());
 		}

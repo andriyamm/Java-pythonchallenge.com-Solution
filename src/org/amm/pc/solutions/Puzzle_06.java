@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.amm.pc.utils.JCHelper;
+import org.amm.pc.utils.JCFileHelper;
 
 public class Puzzle_06 {
 
@@ -38,7 +38,7 @@ public class Puzzle_06 {
 
 	public void solution_0() {
 		try {
-			String sb = JCHelper.getFileContent(FILENAME).toString();
+			String sb = JCFileHelper.getFileContent(FILENAME).toString();
 			List<ArrayList<Pair>> banner = createBanner(sb);
 			printBanner(banner);
 		} catch (FileNotFoundException e) {

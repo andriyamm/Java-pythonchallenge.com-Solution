@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.amm.pc.utils.JCHelper;
+import org.amm.pc.utils.JCFileHelper;
 
 /**
  * In file's of alphabetic characters find sequence of 
@@ -51,7 +51,7 @@ public class Puzzle_04 {
 
 		StringBuffer sb = new StringBuffer();
 		Pattern pattern = Pattern.compile(PATTERN);
-		Matcher matcher = pattern.matcher(JCHelper.getFileContent(filename));
+		Matcher matcher = pattern.matcher(JCFileHelper.getFileContent(filename));
 		while (matcher.find()) {
 			sb.append(matcher.group(1));
 		}
