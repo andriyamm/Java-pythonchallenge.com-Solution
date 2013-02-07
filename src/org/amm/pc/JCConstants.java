@@ -13,4 +13,8 @@ public interface JCConstants {
 	interface Puzzle_05{
 		public static final String PATTERN = "and the next nothing is (\\d+)";
 	}
+	
+	interface Puzzle_08{
+		public static final String PATTERN = "\\d+";
+	}
 }

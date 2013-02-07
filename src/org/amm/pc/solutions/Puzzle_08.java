@@ -1,25 +1,26 @@
 package org.amm.pc.solutions;
 
+import static org.amm.pc.JCConstants.Puzzle_08.PATTERN;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import org.amm.pc.utils.JCHelper;
 import org.apache.commons.io.FileUtils;
 
 public class Puzzle_08 {
 
 	public static void main(String[] args) {
-		try {
-			solution_0();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	// TODO: load the image
@@ -30,38 +31,45 @@ public class Puzzle_08 {
 	// TODO: get pixel
 	// TODO: check if red = green = blue
 
-	public static void solution_0() throws IOException {
-		
-		File file = new File("oxygen.png");
+	public StringBuilder solution_0(String filename) throws IOException {
+
+		File file = new File(filename);
 		BufferedImage bi = ImageIO.read(file);
 
-		int height = bi.getHeight()/2;
-		int width = bi.getWidth();
+		int grayPixelHeightPosition = bi.getHeight() / 2;
+		int imageWidth = bi.getWidth();
+		int red = 0, green = 0, blue = 0;
 
 		StringBuilder sb = new StringBuilder();
 
-		for (int xx = 0; xx < width; xx=xx+7) {
+		for (int pixel = 0; pixel < imageWidth; pixel = pixel + 7) {
 
-			Color originalColor = new Color(bi.getRGB(xx, height));
-			int r1 = originalColor.getRed();
-			int g1 = originalColor.getGreen();
-			int b1 = originalColor.getBlue();
+			Color originalColor = new Color(bi.getRGB(pixel, grayPixelHeightPosition));
 
-			if (r1 == g1 && r1 == b1) {
-				sb.append((char) r1);
+			red = originalColor.getRed();
+			green = originalColor.getGreen();
+			blue = originalColor.getBlue();
+
+			if (red == green && red == blue) {
+				sb.append((char) red);
+			}
+
+		}
+		
+		return findResult(sb);
+	}
+
+	public StringBuilder findResult(StringBuilder sb) {
+
+		StringBuilder result = new StringBuilder();
+		Pattern pattern = Pattern.compile(PATTERN);
+		if (sb != null) {
+			Matcher matcher = pattern.matcher(sb);
+			while (matcher.find()) {
+				result.append((char) Integer.parseInt(matcher.group()));
 			}
 		}
-
-		System.out.println(sb);
-
-		int[] ar = new int[sb.length()];
-
-		for (int i = 0; i < sb.length(); i++) {
-			ar[i] = (char)sb.charAt(i);
-		}
-
-		System.out.println(ar.toString());
-
+		return result;
 	}
 
 }

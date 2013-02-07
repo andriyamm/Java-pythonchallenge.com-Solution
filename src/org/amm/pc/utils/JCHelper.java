@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -98,6 +100,21 @@ public class JCHelper {
 		return null;
 	}
 
+	public static List<String> findAll(String content, String regexprPattern,
+			int groupNumber) {
+
+		List<String> allMatches = new ArrayList<String>();
+		
+		Pattern pattern = Pattern.compile(regexprPattern);
+		if (content != null) {
+			Matcher matcher = pattern.matcher(content);
+			while (matcher.find()) {
+				allMatches.add(matcher.group(groupNumber));
+			}
+		}
+		return allMatches;
+	}
+	
 	/**
 	 * method print a content of web page
 	 * 
