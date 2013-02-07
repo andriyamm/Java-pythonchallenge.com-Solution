@@ -4,18 +4,12 @@ import static org.amm.pc.JCConstants.Puzzle_08.PATTERN;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
-
-import org.amm.pc.utils.JCHelper;
-import org.apache.commons.io.FileUtils;
 
 public class Puzzle_08 {
 
@@ -42,7 +36,7 @@ public class Puzzle_08 {
 
 		StringBuilder sb = new StringBuilder();
 
-		for (int pixel = 0; pixel < imageWidth; pixel = pixel + 7) {
+		for (int pixel = 0; pixel < imageWidth; pixel += 7) {
 
 			Color originalColor = new Color(bi.getRGB(pixel, grayPixelHeightPosition));
 
@@ -53,7 +47,6 @@ public class Puzzle_08 {
 			if (red == green && red == blue) {
 				sb.append((char) red);
 			}
-
 		}
 		
 		return findResult(sb);
